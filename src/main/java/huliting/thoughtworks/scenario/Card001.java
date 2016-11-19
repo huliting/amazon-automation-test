@@ -23,7 +23,8 @@ public class Card001 implements Card {
             extentTest.log(LogStatus.INFO, "Navigated to https://www.amazon.cn/");
             extentTest.log(LogStatus.PASS, "Card001 verified");
         } catch (Exception e) {
-            Report.stopByErrorAndCreateReport(extentTest);
+            String screenPic = Report.takeScreenShot(webDriver);
+            Report.takeErrorReport(extentTest, screenPic);
         }
 
         Report.reporter().endTest(extentTest);
