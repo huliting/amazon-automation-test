@@ -15,7 +15,8 @@ import java.io.IOException;
  * Created on 11/18/16.
  */
 public final class Report {
-    private static final ExtentReports report = new ExtentReports("./test_reports/test-reports.html", true);
+    private static final String REPORT_FOLDER = "./test_reports/";
+    private static final ExtentReports report = new ExtentReports(REPORT_FOLDER + "test-reports.html", true);
 
     private Report() {
     }
@@ -25,20 +26,18 @@ public final class Report {
     }
 
     public static void completeAndCreateReport() {
+        BrowserManager.closeBrowser();
         report.flush();
     }
 
     public static void takeErrorReport(ExtentTest extentTest, String screenPic) {
         extentTest.log(LogStatus.ERROR, "Error Snapshot : " + extentTest.addScreenCapture(screenPic));
-        BrowserManager.closeBrowser();
-        extentTest.log(LogStatus.INFO, "Browser closed");
-
         report.endTest(extentTest);
     }
 
     public static String takeScreenShot(WebDriver webDriver) {
         File screenCapture = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-        String filePath = "./test_reports/" + createRandomErrorPicName();
+        String filePath = REPORT_FOLDER + createRandomErrorPicName();
         File saveFile = new File(filePath);
         try {
             FileUtils.copyFile(screenCapture, saveFile);

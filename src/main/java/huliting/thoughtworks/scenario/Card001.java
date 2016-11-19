@@ -18,9 +18,11 @@ public class Card001 implements Card {
         WebDriver webDriver = BrowserManager.getWebDriver();
 
         try {
-            webDriver.manage().window().maximize();
+            BrowserManager.maxBrowser();
             webDriver.get("https://www.amazon.cn/");
             extentTest.log(LogStatus.INFO, "Navigated to https://www.amazon.cn/");
+
+
             extentTest.log(LogStatus.PASS, "Card001 verified");
         } catch (Exception e) {
             String screenPic = Report.takeScreenShot(webDriver);
