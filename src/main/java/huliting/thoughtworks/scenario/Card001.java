@@ -38,7 +38,8 @@ public class Card001 implements Card {
             extentTest.log(LogStatus.INFO, "Navigated to '" + keyWord + "' page");
 
             BrowserManager.getFluentWebDriver()
-                    .input(id(("add-to-cart-button"))).click();
+                    .input(id("add-to-cart-button"))
+                    .click();
             extentTest.log(LogStatus.INFO, "add product into shopping cart");
 
             ShoppingCartValidator.checkAddItemSuccessful(extentTest);
