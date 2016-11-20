@@ -19,6 +19,7 @@ public final class Report {
     private static final ExtentReports report = new ExtentReports(REPORT_FOLDER + "test-reports.html", true);
 
     private Report() {
+        clearReport();
     }
 
     public static ExtentReports reporter() {
@@ -30,7 +31,8 @@ public final class Report {
         report.flush();
     }
 
-    public static void takeErrorReport(ExtentTest extentTest, String screenPic) {
+    public static void takeErrorReport(ExtentTest extentTest, String screenPic, Exception e) {
+        extentTest.log(LogStatus.ERROR, e.getMessage());
         extentTest.log(LogStatus.ERROR, "Error Snapshot : " + extentTest.addScreenCapture(screenPic));
         report.endTest(extentTest);
     }
@@ -49,5 +51,17 @@ public final class Report {
 
     private static String createRandomErrorPicName() {
         return "error-image-" + System.currentTimeMillis() + ".png";
+    }
+
+    private static void clearReport() {
+        File reportFolder = new File(REPORT_FOLDER);
+        if (reportFolder.exists()) {
+            File[] files = reportFolder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    file.delete();
+                }
+            }
+        }
     }
 }
