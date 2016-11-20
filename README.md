@@ -5,7 +5,8 @@ Note: This project base on JDK8, maven
 mvn package
 java -jar target/amazon-automation-test-1.0-SNAPSHOT-jar-with-dependencies.jar ${webDrivePath}
 ```
-note: ${webDriverPath} is your local web driver location path. you can use the web driver in resources folder  
+note: ${webDriverPath} is your local web driver location path. you can use the web driver in resources folder<br>
+the test case at last will be error, that's an excepted result.
 ### code structure
 Note: * is means it's a java file, else is package folder
 >huliting.thoughtworks---------------this is root package<br>
